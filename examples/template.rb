@@ -1,4 +1,4 @@
-require_relative '../../../lib/unione-ruby'
+require 'unione-ruby'
 require 'json'
 
 # Set template

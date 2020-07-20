@@ -1,5 +1,4 @@
-require_relative '../../../lib/unione-ruby'
-require 'json'
+require 'unione-ruby'
 
 # Create project
 unione = UniOne::Client.new(data_center: 'eu1', lang: 'en', api_key: ENV['UNIONE_API_KEY'])
