@@ -6,7 +6,7 @@ def send_email
   mail.body = {html: "<b>Hello {{substitutionName}}</b>"}
   mail.from = {from_email: 'test@example.com', from_name: 'userName'}
   mail.subject = 'Email Subject'
-  mail.template = {"template_engine" => 'simple', "template_id" => "template_id"}
+  mail.template = {"template_engine" => "simple", "template_id" => "template_id"}
 
   substitutions = {"substitutionName" => "substitutionVal", "to_name" => "Name Surname"}
   recipient = {email: 'test@example.com', substitutions: substitutions, metadata: {"key1" => "val1"}}
