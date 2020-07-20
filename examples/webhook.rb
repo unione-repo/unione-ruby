@@ -4,10 +4,7 @@ require 'json'
 # Set webhook
 webhook = UniOne::Webhook.new
 webhook.url = "http://example.com"
-webhook.event_format = "json_post"
-webhook.delivery_info = 1
-webhook.single_event = 0
-webhook.max_parallel = 10
+webhook.settings = {event_format: "json_post", delivery_info: 1, single_event: 0, max_parallel: 10}
 webhook.events = {email_status: [
   "sent",
   "delivered",
