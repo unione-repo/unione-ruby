@@ -22,6 +22,7 @@ def set_template
   response = unione.set_template(template.to_json)
   puts response.status
   puts response.body.to_h
+  puts response.body.template.id # Get template id for later referencing
   puts response.headers
 end
 
