@@ -4,7 +4,6 @@ unione = UniOne::Client.new(data_center: 'eu1', lang: 'en', api_key: ENV['UNIONE
 
 # Generate/get DNS records for domain verification and DKIM signing
 response = unione.get_dns_records("example.com")
-
 puts response.status
 puts response.body.to_h
 puts response.headers
