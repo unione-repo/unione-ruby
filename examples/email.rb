@@ -8,9 +8,13 @@ mail.from = {from_email: 'test@example.com', from_name: 'userName'}
 mail.subject = 'Email Subject'
 mail.template = {"template_engine" => "simple", "template_id" => "template_id"}
 
-substitutions = {"substitutionName" => "substitutionVal", "to_name" => "Name Surname"}
-recipient = {email: 'test@example.com', substitutions: substitutions, metadata: {"key1" => "val1"}}
-mail.recipients << recipient
+substitutions = {"substitutionName" => "substitutionVal", "to_name" => "Name Surname 1"}
+recipient1 = {email: 'test1@example.com', substitutions: substitutions, metadata: {"key1" => "val1"}}
+mail.recipients << recipient1
+
+substitutions = {"substitutionName" => "substitutionVal", "to_name" => "Name Surname 2"}
+recipient2 = {email: 'test2@example.com', substitutions: substitutions, metadata: {"key1" => "val1"}}
+mail.recipients << recipient2
 
 mail.metadata = {"key1" => "val1"}
 mail.headers = {"X-ReplyTo" => "reply@example.com"}
