@@ -8,13 +8,13 @@ module UniOne
 
     def get(url, params)
       params.merge!(default_params)
-      # Assume http library receive get params as hash
+      # Assume HTTP library receives params as Hash
       request :get, url, params
     end
 
     def post(url, params)
       params.merge!(default_params)
-      # Assume http library receive post payload body as string
+      # Assume HTTP library receives payload body as String
       request :post, url, JSON.dump(params)
     end
 
