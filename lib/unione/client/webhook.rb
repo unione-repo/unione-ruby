@@ -21,6 +21,31 @@ module UniOne
          }})
       end
 
+      def list_webhooks(limit, offset)
+        params = { limit: limit, offset: offset }
+        post 'webhook/list.json', params
+        validate_response({
+          'type' => 'object', 'required' => ['status', 'objects'], 'properties' => {
+            'status' => {'type' => 'string'},
+            'objects' =>
+            {'items' =>
+             {'type' => 'object', 'required' => ['id', 'url', 'status', 'updated_at', 'events', 'event_format', 'delivery_info', 'single_event', 'max_parallel'], 'properties' => [
+              'id' => {'type' => 'integer'},
+              'url' => {'type' => 'string'},
+              'status' => {'type' => 'string'},
+              'updated_at' => {'type' => 'string'},
+              'events' =>
+              {'type' => 'object', 'required' => ['email_status', 'spam_block'], 'properties' => [
+               'email_status' => {'items' => {'type' => 'string'}},
+               'spam_block' => {'items' => {'type' => 'string'}}]},
+              'event_format' => {'type' => 'string'},
+              'delivery_info' => {'type' => 'integer'},
+              'single_event' => {'type' => 'integer'},
+              'max_parallel' => {'type' => 'integer'}
+              ]}}}
+        })
+      end
+
       def delete_webhook(url)
         params = { url: url }
         post 'webhook/delete.json', params
@@ -32,13 +57,15 @@ module UniOne
       private
 
       def webhook_schema
-        {'type' => 'object', 'required' => ['url', 'events', 'event_format', 'delivery_info', 'single_event', 'max_parallel'], 'properties' => {
+        {'type' => 'object', 'required' => ['url', 'status', 'events', 'event_format', 'delivery_info', 'single_event', 'max_parallel'], 'properties' => {
+           'id' => {'type' => 'integer'},
            'url' => {'type' => 'string'},
-           'events' => webhook_events_schema,
+           'status' => {'type' => 'string'},
            'event_format' => {'type' => 'string'},
            'delivery_info' => {'type' => 'integer'},
            'single_event' => {'type' => 'integer'},
-           'max_parallel' => {'type' => 'integer'}
+           'max_parallel' => {'type' => 'integer'},
+           'events' => webhook_events_schema,
          }}
       end
 

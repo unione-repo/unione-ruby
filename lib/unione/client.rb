@@ -2,10 +2,11 @@ require_relative 'connection'
 require_relative 'validation'
 require_relative 'client/domain'
 require_relative 'client/email'
-require_relative 'client/template'
-require_relative 'client/webhook'
-require_relative 'client/unsubscribed'
 require_relative 'client/project'
+require_relative 'client/system'
+require_relative 'client/template'
+require_relative 'client/unsubscribed'
+require_relative 'client/webhook'
 
 module UniOne
 
@@ -15,10 +16,11 @@ module UniOne
     include UniOne::Validation
     include UniOne::Client::Domain
     include UniOne::Client::Email
-    include UniOne::Client::Template
-    include UniOne::Client::Webhook
-    include UniOne::Client::Unsubscribed
     include UniOne::Client::Project
+    include UniOne::Client::System
+    include UniOne::Client::Template
+    include UniOne::Client::Unsubscribed
+    include UniOne::Client::Webhook
 
     API_ENDPOINT =
       'https://%{data_center}.unione.io/%{lang}/transactional/api/v1/'
