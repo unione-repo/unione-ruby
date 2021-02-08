@@ -29,11 +29,12 @@ module UniOne
     #   - +data_center+ -> data center: ['eu1', 'us1']
     #   - +lang+ -> Two-letter ISO 639-1 language abbreviation, e.g. 'en'
     #   - +api_key+ -> your UniOne API key
-    #
-    def initialize(data_center:, lang:, api_key:)
-      @data_center = data_center
-      @lang = lang
-      @api_key = api_key
+    #   - +api_key_in_params+ -> boolean, pass API key inside form, otherwise pass in headers (default in headers)
+    def initialize(params = {})
+      @data_center       = params[:data_center]
+      @lang              = params[:lang]
+      @api_key           = params[:api_key]
+      @api_key_in_params = !!params[:api_key_in_params]
     end
 
     private
