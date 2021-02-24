@@ -24,12 +24,7 @@ module UniOne
 
     def request(method, path, data)
       path = add_version(path)
-      begin
-        @last_response = conn.send(method, path, data)
-      rescue Faraday::Error => e
-        puts e.response[:body]
-        raise
-      end
+      @last_response = conn.send(method, path, data)
     end
 
     def conn
