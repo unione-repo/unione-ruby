@@ -7,33 +7,33 @@ module UniOne
   module Connection
 
     def get(url, params)
-      params.merge!(default_params)
+      prepare_params!(params)
+
       # Assume HTTP library receives params as Hash
-      request :get, url, params
+      request(:get, url, params)
     end
 
     def post(url, params)
-      params.merge!(default_params)
+      prepare_params!(params)
+
       # Assume HTTP library receives payload body as String
-      request :post, url, JSON.dump(params)
+      request(:post, url, JSON.dump(params))
     end
 
     private
 
     def request(method, path, data)
       path = add_version(path)
-      begin
-        @last_response = conn.send(method, path, data)
-      rescue Faraday::Error => e
-        puts e.response[:body]
-        raise
-      end
+      @last_response = conn.send(method, path, data)
     end
 
     def conn
+      headers = {'Content-Type' => 'application/json'}
+      prepare_headers!(headers)
+
       @conn ||= Faraday.new(
         url: api_endpoint,
-        headers: {'Content-Type' => 'application/json'},
+        headers: headers,
         request: { timeout: 30 }
       ) do |conn|
         conn.response :mashify, content_type: /\bjson$/
@@ -43,8 +43,12 @@ module UniOne
       end
     end
 
-    def default_params
-      { api_key: @api_key }
+    def prepare_params!(params)
+      params.merge!({api_key: @api_key}) if @api_key_in_params
+    end
+
+    def prepare_headers!(headers)
+      headers.merge!('X-API-KEY' => @api_key) unless @api_key_in_params
     end
 
     def add_version(path)

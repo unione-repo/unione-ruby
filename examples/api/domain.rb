@@ -9,10 +9,10 @@ puts response.body.to_h
 puts response.headers
 
 # Validate domain verification record before use
-response = unione.validate_verification_record("example.com")
+response = unione.validate_verification_record('example.com')
 
 # Validate DKIM signature before sending
-response = unione.validate_dkim("example.com")
+response = unione.validate_dkim('example.com')
 
 # Get a list of your domains and their verification/DKIM statuses
 response = unione.list_domains

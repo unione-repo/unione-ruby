@@ -1,8 +1,6 @@
 module UniOne
   class Client
-
     module Domain
-
       def get_dns_records(domain)
         params = { domain: domain }
         post 'domain/get-dns-records.json', params
@@ -55,7 +53,6 @@ module UniOne
               ]}}}
         })
       end
-
     end
   end
 end

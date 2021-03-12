@@ -45,10 +45,11 @@ module UniOne
       private
 
       def template_schema
-        {'type' => 'object', 'required' => ['id', 'name', 'subject', 'from_name', 'body', 'headers', 'attachments',
-                                            'inline_attachments', 'options', 'created', 'user_id'], 'properties' => {
+        {'type' => 'object', 'required' => ['id', 'name', 'editor_type', 'subject', 'from_name', 'body', 'headers', 'attachments',
+                                            'inline_attachments', 'created', 'user_id'], 'properties' => {
            'id' => {'type' => 'string'},
            'name' => {'type' => 'string'},
+           'editor_type' => {'type' => 'string'},
            'subject' => {'type' => 'string'},
            'from_name' => {'type' => 'string'},
            'body' => template_body_schema,

@@ -1,20 +1,37 @@
 require 'unione-ruby'
 
-# Create project
 unione = UniOne::Client.new(data_center: 'eu1', lang: 'en', api_key: ENV['UNIONE_API_KEY'])
-response = unione.create_project(
-  {"name" => "Projectname 2", "send_enabled" => true, "custom_unsubscribe_url_enabled" => true})
+
+# create project
+response = unione.create_project({
+  name: 'Project Name',
+  send_enabled: true,
+  # custom_unsubscribe_url_enabled: true, # Should have rights to use
+})
+
 puts response.status
 puts response.body.to_h
 puts response.headers
 
-# Update project
-response = unione.update_project("5qugsquc85i1e87xfb4spgxh8bnmi1pjfrtx1w1c",
-  {"name" => "Projectname 2", "send_enabled" => true, "custom_unsubscribe_url_enabled" => true})
+project_id = response.body.project_id
 
-# Delete project
-response = unione.delete_project("5qegsquc85i1e87xfb4spgxh8bnmi1pjfrtx1w1c")
+# update project
+response = unione.update_project(
+  {
+    project_id: project_id
+  },
+  {
+    name: 'New Project Name',
+    send_enabled: true,
+    # custom_unsubscribe_url_enabled: true, # Should have rights to use
+  }
+)
 
-# List projects
+# list all projects
 response = unione.list_projects
-response = unione.list_projects("5qegsquc85i1e87xfb4spgxh8bnmi1pjfrtx1w1c")
+
+# list project by id
+response = unione.list_projects({ project_id: project_id })
+
+# delete project
+response = unione.delete_project({ project_id: project_id })

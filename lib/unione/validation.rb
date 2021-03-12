@@ -6,12 +6,7 @@ module UniOne
     private
 
     def validate_response(schema)
-      begin
-        JSON::Validator.validate!(schema, @last_response.body)
-      rescue JSON::Schema::ValidationError => e
-        puts @last_response.body
-        raise
-      end
+      JSON::Validator.validate!(schema, @last_response.body)
       @last_response
     end
 

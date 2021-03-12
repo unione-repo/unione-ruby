@@ -24,6 +24,12 @@ puts response.body['status']
 puts response.body.status
 ~~~
 
+By default authentication produced through X-API-KEY header. For passing API key in params use:
+
+```
+unione = UniOne::Client.new(data_center: 'eu1', lang: 'en', api_key: ENV['UNIONE_API_KEY'], api_key_in_params: true)
+```
+
 ## Handling API errors
 Library using [`raise-error' middleware](https://lostisland.github.io/faraday/middleware/raise-error) for handling error responses.
 
