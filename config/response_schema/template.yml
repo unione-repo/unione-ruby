@@ -1,0 +1,134 @@
+set_template: &template
+  type: object
+  required:
+    - status
+    - template
+  properties:
+    status:
+      type: string
+    template:
+      type: object
+      required:
+        - id
+        - name
+        - editor_type
+        - subject
+        - from_name
+        - body
+        - headers
+        - attachments
+        - inline_attachments
+        - created
+        - user_id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        editor_type:
+          type: string
+        subject:
+          type: string
+        from_name:
+          type: string
+        body:
+          type: object
+          required:
+            - html
+            - plaintext
+            - amp
+          properties:
+            html:
+              type: string, null
+            plaintext:
+              type: string, null
+            amp:
+              type: string, null
+        headers:
+          type: object
+        attachments:
+          items:
+            type: object
+        inline_attachments:
+          items:
+            type: object
+        options:
+          type: object
+          required:
+            - unsubscribe_url
+          properties:
+            unsubscribe_url:
+              type: string
+        created:
+          type: string
+        user_id:
+          type: integer
+get_template:
+  <<: *template
+list_templates:
+  type: object
+  required:
+    - status
+    - templates
+  properties:
+    status:
+      type: string
+    templates:
+      items:
+        type: object
+        required:
+          - id
+          - name
+          - editor_type
+          - subject
+          - body
+          - attachments
+          - inline_attachments
+          - created
+          - user_id
+        properties:
+          id:
+            type: string
+          name:
+            type: string
+          editor_type:
+            type: string
+          subject:
+            type: string
+          body:
+            type: object
+            required:
+              - html
+              - plaintext
+              - amp
+            properties:
+              html:
+                type: string, null
+              plaintext:
+                type: string, null
+              amp:
+                type: string, null
+          attachments:
+            items:
+              type: object
+          inline_attachments:
+            items:
+              type: object
+          options:
+            type: object
+            required:
+              - unsubscribe_url
+            properties:
+              unsubscribe_url:
+                type: string
+          created:
+            type: string
+          user_id:
+            type: integer
+delete_template:
+  type: object
+  required:
+    - status
+  properties:
+    status:
+      type: string

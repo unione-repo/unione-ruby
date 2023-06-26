@@ -1,0 +1,71 @@
+- method: send_email
+  params:
+    message:
+      recipients:
+      - email: test@qadns.net
+        substitutions:
+          CustomerId: 12452
+          to_name: John Smith
+        metadata:
+          campaign_id: c77f4f4e-3561-49f7-9f07-c35be01b4f43
+          customer_hash: b253ac7
+      tags:
+      - string1
+      skip_unsubscribe: 0
+      global_language: en
+      template_engine: simple
+      global_substitutions:
+        property1: string
+        property2: string
+      global_metadata:
+        property1: string
+        property2: string
+      body:
+        html: "<b>Hello, {{to_name}}</b>"
+        plaintext: Hello, {{to_name}}
+        amp: <!doctype html><html amp4email><head> <meta charset="utf-8"><script async
+          src="https://cdn.ampproject.org/v0.js"></script> <style amp4email-boilerplate>body{visibility:hidden}</style></head><body>
+          Hello, AMP4EMAIL world.</body></html>
+      subject: string
+      from_email: test@qadns.net
+      from_name: John Smith
+      reply_to: test@qadns.net
+      track_links: 0
+      track_read: 0
+      bypass_global: 0
+      bypass_unavailable: 0
+      bypass_unsubscribed: 0
+      bypass_complained: 0
+      headers:
+        X-MyHeader: some data
+        List-Unsubscribe: "<mailto: unsubscribe@example.com?subject=unsubscribe>, <http://www.example.com/unsubscribe/{{CustomerId}}>"
+      attachments:
+      - type: text/plain
+        name: readme.txt
+        content: SGVsbG8sIHdvcmxkIQ==
+      inline_attachments:
+      - type: image/gif
+        name: IMAGECID1
+        content: R0lGODdhAwADAIABAP+rAP///ywAAAAAAwADAAACBIQRBwUAOw==
+      options:
+        unsubscribe_url: https://example.org/unsubscribe/{{CustomerId}}
+- method: set_webhook
+  params:
+    url: http://example.com
+    status: active
+    event_format: json_post
+    delivery_info: 1
+    single_event: 0
+    max_parallel: 10
+    events:
+      email_status:
+      - sent
+      - delivered
+      - opened
+      - hard_bounced
+      - soft_bounced
+      - spam
+      - clicked
+      - unsubscribed
+      spam_block:
+      - '*'

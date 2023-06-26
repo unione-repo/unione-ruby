@@ -1,0 +1,74 @@
+get_dns_records:
+  type: object
+  required:
+    - status
+    - domain
+    - verification-record
+    - dkim
+  properties:
+    status:
+      type: string
+    domain:
+      type: string
+    verification-record:
+      type: string
+    dkim:
+      type: string
+validate_verification_record:
+  type: object
+  required:
+    - status
+    - message
+  properties:
+    status:
+      type: string
+    message:
+      type: string
+validate_dkim:
+  type: object
+  required:
+    - status
+    - message
+  properties:
+    status:
+      type: string
+    message:
+      type: string
+list_domains:
+  type: object
+  required:
+    - status
+    - domains
+  properties:
+    status:
+      type: string
+    domains:
+      items:
+        type: object
+        required:
+          - domain
+          - verification-record
+          - dkim
+        properties:
+        - domain:
+            type: string
+          verification-record:
+            type: object
+            required:
+              - value
+              - status
+            properties:
+            - value:
+                type: string
+              status:
+                type: string
+          dkim:
+            type: object
+            required:
+              - key
+              - status
+            properties:
+            - key:
+                type: string
+              status:
+                type: string

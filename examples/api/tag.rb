@@ -6,5 +6,10 @@ unione = UniOne::Client.new(
   api_key: ENV['UNIONE_API_KEY']
 )
 
-# Get user or project info
-response = unione.info
+# List tags
+response = unione.list_tags
+
+# Delete tag
+response = unione.delete_tag(
+  tag_id: tag_id
+)

@@ -1,0 +1,45 @@
+unsubscribe:
+  type: object
+  required:
+    - status
+    - address
+    - message
+  properties:
+    status:
+      type: string
+    address:
+      type: string
+    message:
+      type: string
+check_unsubscribed:
+  type: object
+  required:
+    - status
+    - address
+    - is_unsubscribed
+  properties:
+    status:
+      type: string
+    address:
+      type: string
+    is_unsubscribed:
+      type: boolean
+list_unsubscribed:
+  type: object
+  required:
+    - status
+    - unsubscribed
+  properties:
+    status:
+      type: string
+    unsubscribed:
+      items:
+        type: object
+      required:
+        - address
+        - unsubscribed_on
+      properties:
+        address:
+          type: string
+        unsubscribed_on:
+          type: string

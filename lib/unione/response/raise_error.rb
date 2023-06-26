@@ -1,14 +1,13 @@
+# UniOne response middleware
+
 require 'faraday'
 require 'unione/error'
 
 module UniOne
-  # UniOne response middleware
   module Response
-
-    # This class raises an UniOne-flavored exception based
-    # HTTP status codes returned by the API
+    # This class raises an UniOne-flavored exception based on HTTP
+    # status codes returned by the API
     class RaiseError < Faraday::Response::Middleware
-
       private
 
       def on_complete(response)

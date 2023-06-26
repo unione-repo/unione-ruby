@@ -1,0 +1,26 @@
+list_tags:
+  type: object
+  required:
+    - status
+    - tags
+  properties:
+    status:
+      type: string
+    tags:
+      items:
+        type: object
+        required:
+          - tag_id
+          - tag
+        properties:
+          tag_id:
+            type: integer
+          tag:
+            type: string
+delete_tag:
+  type: object
+  required:
+    - status
+  properties:
+    status:
+      type: string

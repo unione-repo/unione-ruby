@@ -1,5 +1,2 @@
 require_relative 'unione/client'
 require_relative 'unione/version'
-require_relative 'unione/helpers/mail/mail'
-require_relative 'unione/helpers/template/template'
-require_relative 'unione/helpers/webhook/webhook'

@@ -1,0 +1,141 @@
+set_webhook:
+  type: object
+  required:
+    - status
+    - object
+  properties:
+    status:
+      type: string
+    object:
+      type: object
+      required:
+        - url
+        - status
+        - events
+        - event_format
+        - delivery_info
+        - single_event
+        - max_parallel
+      properties:
+        id:
+          type: integer
+        url:
+          type: string
+        status:
+          type: string
+        event_format:
+          type: string
+        delivery_info:
+          type: integer
+        single_event:
+          type: integer
+        max_parallel:
+          type: integer
+        events:
+          type: object
+          required:
+            - email_status
+            - spam_block
+          properties:
+           email_status:
+             items:
+               type: string
+           spam_block:
+             items:
+               type: string
+get_webhook:
+  type: object
+  required:
+    - status
+    - object
+  properties:
+    status:
+      type: string
+    object:
+      type: object
+      required:
+        - url
+        - status
+        - events
+        - event_format
+        - max_parallel
+      properties:
+        id:
+          type: integer
+        url:
+          type: string
+        status:
+          type: string
+        event_format:
+          type: string
+        max_parallel:
+          type: integer
+        events:
+          type: object
+          required:
+            - email_status
+            - spam_block
+          properties:
+           email_status:
+             items:
+               type: string
+           spam_block:
+             items:
+               type: string
+list_webhooks:
+  type: object
+  required:
+    - status
+    - objects
+  properties:
+    status:
+      type: string
+    objects:
+      items:
+        type: object
+        required:
+          - id
+          - url
+          - status
+          - updated_at
+          - events
+          - event_format
+          - delivery_info
+          - single_event
+          - max_parallel
+        properties:
+           id:
+             type: integer
+           url:
+             type: string
+           status:
+             type: string
+           event_format:
+             type: string
+           delivery_info:
+             type: integer
+           single_event:
+             type: integer
+           max_parallel:
+             type: integer
+           updated_at:
+             type: string
+           events:
+             type: object
+             required:
+               - email_status
+               - spam_block
+             properties:
+               spam_block:
+                 items:
+                   type: string
+               email_status:
+                 items:
+                   type: string
+delete_webhook:
+  type: object
+  required:
+    - status
+  properties:
+    status:
+      type: string

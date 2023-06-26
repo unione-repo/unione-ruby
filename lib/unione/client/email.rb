@@ -1,24 +1,25 @@
 module UniOne
   class Client
     module Email
-      def send_email(message)
-        post 'email/send.json', message
-        validate_response({
-          'type' => 'object', 'required' => ['status', 'job_id', 'emails'], 'properties' => {
-            'status' => {'type' => 'string'},
-            'job_id' => {'type' => 'string'},
-            'emails' => {'items' => {'type' => 'string'}},
-            'failed_emails' => {'type' => 'object'}}
-        })
+      extend UniOne::Validation::ClassMethods
+      include UniOne::Validation::InstanceMethods
+
+      def send_email(params = {})
+        params[:message][:options][:send_at] = handle_time_param(params.dig(:message, :options, :send_at)) if params.dig(:message, :options, :send_at)
+        post('email/send.json', params)
       end
 
-      def subscribe_email(params)
-        post 'email/subscribe.json', params
-        validate_response({
-          'type' => 'object', 'required' => ['status'], 'properties' => {
-            'status' => {'type' => 'string'}}
-        })
+      def subscribe_email(params = {})
+        post('email/subscribe.json', params)
       end
+
+      add_response_validations(
+        :email,
+        %w(
+          send_email
+          subscribe_email
+        )
+      )
     end
   end
 end

@@ -1,0 +1,59 @@
+create_project:
+  type: object
+  required:
+    - status
+    - project_id
+    - project_api_key
+  properties:
+    status:
+      type: string
+    project_id:
+      type: string
+    project_api_key:
+      type: string
+update_project:
+  type: object
+  required:
+    - status
+  properties:
+    status:
+      type: string
+    project_api_key:
+      type: string
+list_projects:
+  type: object
+  required:
+    - status
+  properties:
+    status:
+      type: string
+    projects:
+      items:
+        type: object
+        required:
+          - id
+          - api_key
+          - name
+          - reg_time
+          - send_enabled
+          - custom_unsubscribe_url_enabled
+        properties:
+          id:
+            type: string
+          api_key:
+            type: string
+          name:
+            type: string
+          reg_time:
+            type: string
+          send_enabled:
+            type: boolean
+          custom_unsubscribe_url_enabled:
+            type: boolean
+delete_project:
+  type: object
+  required:
+    - status
+  properties:
+    status:
+      type: string

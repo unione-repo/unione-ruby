@@ -1,0 +1,71 @@
+set_suppression:
+  type: object
+  required:
+    - status
+  properties:
+    status:
+      type: string
+get_suppression:
+  type: object
+  required:
+    - status
+    - email
+    - suppressions
+  properties:
+    status:
+      type: string
+    email:
+      type: string
+    suppressions:
+      items:
+        type: object
+        required:
+          - cause
+          - source
+          - is_deletable
+          - created
+        properties:
+          project_id:
+            type: string
+          cause:
+            type: string
+          source:
+            type: string
+          is_deletable:
+            type: boolean
+          created:
+            type: string
+list_suppressions:
+  type: object
+  required:
+    - status
+    - suppressions
+    - cursor
+  properties:
+    status:
+      type: string
+    suppressions:
+      items:
+        type: object
+        required:
+          - cause
+          - source
+          - is_deletable
+          - created
+        properties:
+          project_id:
+            type: string
+          cause:
+            type: string
+          source:
+            type: string
+          is_deletable:
+            type: boolean
+          created:
+            type: string
+          cursor:
+            type: string
+delete_suppression:
+  type: object
+  required:
+    - status

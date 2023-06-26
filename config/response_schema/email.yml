@@ -1,0 +1,23 @@
+send_email:
+  type: object
+  required:
+    - status
+    - job_id
+    - emails
+  properties:
+    status:
+      type: string
+    job_id:
+      type: string
+    emails:
+      items:
+        type: string
+    failed_emails:
+      type: object
+subscribe_email:
+  type: object
+  required:
+    - status
+  properties:
+    status:
+      type: string

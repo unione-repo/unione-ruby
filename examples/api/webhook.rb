@@ -1,39 +1,42 @@
 require 'unione-ruby'
 require 'json'
 
-unione = UniOne::Client.new(data_center: 'eu1', lang: 'en', api_key: ENV['UNIONE_API_KEY'])
+unione = UniOne::Client.new(
+  hostname: 'eu1.unione.io',
+  lang: 'en',
+  api_key: ENV['UNIONE_API_KEY']
+)
 
-# set webhook
-webhook = UniOne::Webhook.new
+# Set webhook
+params = {}
 
-webhook.url      = 'http://example.com'
-webhook.status   = :active
+params[:url] = 'http://example.com'
+params[:status] = :active
 
-webhook.settings = {
-  event_format: :json_post,
-  delivery_info: 1,
-  single_event: 0,
-  max_parallel: 10
-}
+params[:event_format] = :json_post
+params[:delivery_info] = 1
+params[:single_event] = 0
+params[:max_parallel] = 10
 
-webhook.events = {
+params[:events] = {
   email_status: %w(sent delivered opened hard_bounced soft_bounced spam clicked unsubscribed),
   spam_block: ["*"]
 }
 
-puts webhook.to_json
+response = unione.set_webhook(params)
 
-response = unione.set_webhook(webhook.to_json)
+# Get webhook
+response = unione.get_webhook(
+  url: 'http://example.com'
+)
 
-puts response.status
-puts response.body.to_h
-puts response.headers
+# List all webhooks
+response = unione.list_webhooks(
+  limit: 50,
+  offset: 0
+)
 
-# get webhook
-response = unione.get_webhook('http://example.com')
-
-# list all webhooks
-response = unione.list_webhooks(50, 0)
-
-# delete webhook
-response = unione.delete_webhook('http://example.com')
+# Delete webhook
+response = unione.delete_webhook(
+  url: 'http://example.com'
+)

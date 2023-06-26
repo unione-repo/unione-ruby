@@ -6,14 +6,14 @@ require 'hashie'
 module UniOne
   module Connection
 
-    def get(url, params)
+    def get(url, params = {})
       prepare_params!(params)
 
       # Assume HTTP library receives params as Hash
       request(:get, url, params)
     end
 
-    def post(url, params)
+    def post(url, params = {})
       prepare_params!(params)
 
       # Assume HTTP library receives payload body as String
@@ -34,12 +34,16 @@ module UniOne
       @conn ||= Faraday.new(
         url: api_endpoint,
         headers: headers,
-        request: { timeout: 30 }
+        request: { timeout: @timeout }
       ) do |conn|
         conn.response :mashify, content_type: /\bjson$/
         conn.response :json, content_type: /\bjson$/
         conn.response :raise_error
         conn.adapter :net_http_persistent
+
+        if @enable_logging
+          conn.response(:logger, nil, { headers: true, bodies: true, errors: true })
+        end
       end
     end
 

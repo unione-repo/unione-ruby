@@ -1,16 +1,22 @@
 require 'unione-ruby'
 
-unione = UniOne::Client.new(data_center: 'eu1', lang: 'en', api_key: ENV['UNIONE_API_KEY'])
+unione = UniOne::Client.new(
+  hostname: 'eu1.unione.io',
+  lang: 'en',
+  api_key: ENV['UNIONE_API_KEY']
+)
 
-# unsubscribe email
-response = unione.unsubscribe('email@example.com')
+# Unsubscribe email
+response = unione.unsubscribe(
+  address: 'email@example.com'
+)
 
-puts response.status
-puts response.body.to_h
-puts response.headers
+# Check email is unsubscribed
+response = unione.check_unsubscribed(
+  address: 'email@example.com'
+)
 
-# check email is unsubscribed
-response = unione.check_unsubscribed('email@example.com')
-
-# list unsubscribed emails
-response = unione.list_unsubscribed('2019-01-01')
+# List unsubscribed emails
+response = unione.list_unsubscribed(
+  date_from: Date.today # Or String: '2019-01-01'
+)

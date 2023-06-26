@@ -1,80 +1,34 @@
 module UniOne
   class Client
-
     module Webhook
+      extend UniOne::Validation::ClassMethods
+      include UniOne::Validation::InstanceMethods
 
-      def set_webhook(webhook)
-        post 'webhook/set.json', webhook
-        validate_response({'type' => 'object', 'required' => ['status', 'object'], 'properties' => {
-           'status' => {'type' => 'string'},
-           'object' => webhook_schema
-         }})
+      def set_webhook(params = {})
+        post('webhook/set.json', params)
       end
 
-      def get_webhook(url)
-        params = { url: url }
-        post 'webhook/get.json', params
-        get_webhook_schema = remove_fields_from_schema(webhook_schema, ['delivery_info', 'single_event'])
-        validate_response({'type' => 'object', 'required' => ['status', 'object'], 'properties' => {
-           'status' => {'type' => 'string'},
-           'object' => get_webhook_schema
-         }})
+      def get_webhook(params = {})
+        post('webhook/get.json', params)
       end
 
-      def list_webhooks(limit, offset)
-        params = { limit: limit, offset: offset }
-        post 'webhook/list.json', params
-        validate_response({
-          'type' => 'object', 'required' => ['status', 'objects'], 'properties' => {
-            'status' => {'type' => 'string'},
-            'objects' =>
-            {'items' =>
-             {'type' => 'object', 'required' => ['id', 'url', 'status', 'updated_at', 'events', 'event_format', 'delivery_info', 'single_event', 'max_parallel'], 'properties' => [
-              'id' => {'type' => 'integer'},
-              'url' => {'type' => 'string'},
-              'status' => {'type' => 'string'},
-              'updated_at' => {'type' => 'string'},
-              'events' =>
-              {'type' => 'object', 'required' => ['email_status', 'spam_block'], 'properties' => [
-               'email_status' => {'items' => {'type' => 'string'}},
-               'spam_block' => {'items' => {'type' => 'string'}}]},
-              'event_format' => {'type' => 'string'},
-              'delivery_info' => {'type' => 'integer'},
-              'single_event' => {'type' => 'integer'},
-              'max_parallel' => {'type' => 'integer'}
-              ]}}}
-        })
+      def list_webhooks(params = {})
+        post('webhook/list.json', params)
       end
 
-      def delete_webhook(url)
-        params = { url: url }
-        post 'webhook/delete.json', params
-        validate_response({'type' => 'object', 'required' => ['status'], 'properties' => {
-           'status' => {'type' => 'string'}
-         }})
+      def delete_webhook(params = {})
+        post('webhook/delete.json', params)
       end
 
-      private
-
-      def webhook_schema
-        {'type' => 'object', 'required' => ['url', 'status', 'events', 'event_format', 'delivery_info', 'single_event', 'max_parallel'], 'properties' => {
-           'id' => {'type' => 'integer'},
-           'url' => {'type' => 'string'},
-           'status' => {'type' => 'string'},
-           'event_format' => {'type' => 'string'},
-           'delivery_info' => {'type' => 'integer'},
-           'single_event' => {'type' => 'integer'},
-           'max_parallel' => {'type' => 'integer'},
-           'events' => webhook_events_schema,
-         }}
-      end
-
-      def webhook_events_schema
-        {'type' => 'object', 'required' => ['email_status', 'spam_block'], 'properties' => {
-           'email_status' => {'items' => {'type' => 'string'}},
-           'spam_block' => {'items' => {'type' => 'string'}}
-         }}
-      end
+      add_response_validations(
+        :webhook,
+        %w(
+          set_webhook
+          get_webhook
+          list_webhooks
+          delete_webhook
+        )
+      )
     end
   end
 end

@@ -1,0 +1,75 @@
+create_event_dump:
+  type: object
+  required:
+    - status
+    - dump_id
+  properties:
+    status:
+      type: string
+    dump_id:
+      type: string
+get_event_dump:
+  type: object
+  required:
+    - status
+    - event_dump
+  properties:
+    status:
+      type: string
+    event_dump:
+      type: object
+      required:
+        - dump_id
+        - dump_status
+      properties:
+        dump_id:
+          type: string
+        dump_status:
+          type: string
+        files:
+          items:
+            type: object
+            required:
+              - url
+              - size
+            properties:
+              url:
+                type: string
+              size:
+                type: integer
+list_event_dumps:
+  type: object
+  required:
+    - status
+    - event_dumps
+  properties:
+    status:
+      type: string
+    event_dumps:
+      items:
+        type: object
+        required:
+          - dump_id
+          - dump_status
+        properties:
+          dump_id:
+            type: string
+          dump_status:
+            type: string
+          files:
+            items:
+              required:
+                - url
+                - size
+              properties:
+                url:
+                  type: string
+                size:
+                  type: integer
+delete_event_dump:
+  type: object
+  required:
+    - status
+  properties:
+    status:
+      type: string

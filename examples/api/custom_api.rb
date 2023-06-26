@@ -6,5 +6,9 @@ unione = UniOne::Client.new(
   api_key: ENV['UNIONE_API_KEY']
 )
 
-# Get user or project info
-response = unione.info
+# Custom Api call
+response =
+  unione.post(
+    'domain/get-dns-records.json',
+    domain: 'example.com'
+  )
