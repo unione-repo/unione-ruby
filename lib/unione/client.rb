@@ -44,7 +44,7 @@ module UniOne
     #   - +enable_logging+    -> boolean, enable logging
     def initialize(params = {})
       @hostname          = params[:hostname]
-      @lang              = params[:lang]
+      @lang              = params[:lang] || 'en'
       @api_key           = params[:api_key]
       @timeout           = params[:timeout] || 5
       @api_key_in_params = params[:api_key_in_params]
