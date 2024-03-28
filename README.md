@@ -10,7 +10,7 @@ UniOne (unione.io) integration gem for Ruby
 
 ## Working with API responses
 
-This library using [faraday](https://github.com/lostisland/faraday) gem for making HTTP queries along with [mashify middleware](https://github.com/hashie/hashie#mash) for post-processing response body. So, you can use extended syntax for accessing response fields.
+This library uses [faraday](https://github.com/lostisland/faraday) gem for making HTTP queries along with [mashify middleware](https://github.com/hashie/hashie#mash) for post-processing response body. So, you can use extended syntax for accessing response fields.
 
 Example of work with responses:
 
